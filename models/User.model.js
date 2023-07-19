@@ -47,6 +47,17 @@ async function updateUserChatLogModel(username, chatlog) {
   }
 }
 
+async function searchUserChatsModel(username) {
+  try {
+    const user = await User.findOne({ username: username });
+    if (user) {
+      return user;
+    }
+    return "";
+  } catch (error) {}
+}
+
 module.exports = {
   updateUserChatLogModel,
+  searchUserChatsModel,
 };

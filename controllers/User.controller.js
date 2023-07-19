@@ -1,15 +1,16 @@
-const { updateUserChatLogModel } = require("../models/User.model");
+const {
+  updateUserChatLogModel,
+  searchUserChatsModel,
+} = require("../models/User.model");
 
-const findUserController = async (req, res) => {
+const searchUserChatsController = async (req, res) => {
   try {
     const { username } = req.query;
-    const user = await findUser(username);
+    const user = await searchUserChatsModel(username);
     if (user) {
-      return res
-        .status(200)
-        .json({ message: "Success returning the user.", data: user });
+      return res.status(200).json({ message: "Success", data: user });
     }
-    return res.status(404).json({ message: "User not found" });
+    return res.status(200).json({ message: "User not found" });
   } catch (error) {
     return res.status(404).json({ error });
   }
@@ -26,6 +27,6 @@ const updateUserChatLogController = async (req, res) => {
 };
 
 module.exports = {
-  findUserController,
+  searchUserChatsController,
   updateUserChatLogController,
 };
